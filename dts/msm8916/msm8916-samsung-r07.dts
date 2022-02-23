@@ -1,0 +1,42 @@
+// SPDX-License-Identifier: GPL-2.0-only
+
+/dts-v1/;
+
+#include <skeleton.dtsi>
+#include <lk2nd.h>
+
+/ {
+    // This is used by the bootloader to find the correct DTB
+	qcom,msm-id = <206 0>;
+	qcom,board-id = <0xCE08FF01 7>;
+
+    fortuna3g {
+		model = "Samsung Galaxy Grand Prime 3G (SM-G530H)";
+		compatible = "samsung,fortuna3g", "qcom,msm8916", "lk2nd,device";
+		lk2nd,match-bootloader = "G530H*";
+
+		// The stock Samsung bootloader seems to pick <0x0C01FF01 4> as the board id as opposed to <0xCE08FF01 7>
+		// This line should fix that
+		qcom,msm-id = <206 0>;
+		qcom,board-id = <0xCE08FF01 7>;
+
+		lk2nd,keys = <KEY_HOME 109 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+
+		samsung,muic-reset {
+			i2c-gpio-pins = <2 3>;
+			i2c-address = <0x25>;
+		};
+
+		panel {
+			compatible = "samsung,gprime-panel";
+
+			mdss_dsi_hx8389c_qhd_video {
+				compatible = "samsung,hx8389c";
+			};
+
+			ss_dsi_panel_S6D78A0_GH9607501A_QHD {
+				compatible = "samsung,s6d78a0-gh9607501a";
+			};
+		};
+	};
+};
