@@ -27,6 +27,18 @@
 		compatible = "samsung,gprimeltecan", "qcom,msm8916", "lk2nd,device";
 		lk2nd,match-bootloader = "G530W*";
 
+		panel {
+			compatible = "samsung,gprime-panel";
+
+			mdss_dsi_hx8389c_qhd_video {
+				compatible = "samsung,hx8389c";
+			};
+
+			ss_dsi_panel_S6D78A0_GH9607501A_QHD {
+				compatible = "samsung,s6d78a0-gh9607501a";
+			};
+		};
+
 		samsung,muic-reset {
 			i2c-gpio-pins = <2 3>;
 			i2c-address = <0x25>;
